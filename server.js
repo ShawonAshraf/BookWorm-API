@@ -2,10 +2,14 @@ import express from "express"
 // for parsing json body requests
 import bodyParser from "body-parser"
 
+// import routers
 import bookRouter from "./routes/book-routes"
 
+// config
+import "./config/config"
+
 // define port number
-let port = process.env.PORT | 3000
+let port = process.env.PORT || 3000
 
 let app = new express()
 
