@@ -7,6 +7,8 @@ import bookRouter from "./routes/book-routes"
 
 // config
 import "./config/config"
+// db init
+import db from "./db/db"
 
 // define port number
 let port = process.env.PORT || 3000
