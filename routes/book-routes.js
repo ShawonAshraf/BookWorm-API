@@ -9,7 +9,7 @@ var bookRouter = express.Router()
 bookRouter.get("/all", (req, res) => {
     Book.find({})
         .then((books) => {
-            res.send({
+            res.status(200).send({
                 books
             })
         })
