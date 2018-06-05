@@ -23,3 +23,6 @@ app.use("/books", bookRouter)
 app.listen(port, () => {
     console.log("Server running at ", port)
 })
+
+// export for testing
+export default app
