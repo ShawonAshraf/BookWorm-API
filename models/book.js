@@ -9,7 +9,10 @@ let schemaProperties = {
 let BookSchema = new mongoose.Schema({
     name: schemaProperties,
     author: schemaProperties,
-    addedOn: new Date(),
+    addedOn: {
+        type: number,
+        default: null
+    },
     addedBy: schemaProperties
 })
 
