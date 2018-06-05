@@ -23,8 +23,7 @@ export const books = [{
 export const populateBookData = (done) => {
     Book.remove({})
         .then(() => {
-            Book.insertMany(books)
+            return Book.insertMany(books)
         })
         .then(() => done())
-        .catch(err => console.log(err))
 }
