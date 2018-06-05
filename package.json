@@ -1,19 +1,35 @@
 {
-  "name": "bookworm-api",
-  "version": "1.0.0",
-  "description": "API for a personal book library manager",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ShawonAshraf/BookWorm-API.git"
-  },
-  "author": "Shawon Ashraf",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ShawonAshraf/BookWorm-API/issues"
-  },
-  "homepage": "https://github.com/ShawonAshraf/BookWorm-API#readme"
+    "name": "bookworm-api",
+    "version": "1.0.0",
+    "description": "API for a personal book library manager",
+    "main": "index.js",
+    "scripts": {
+        "start": "npm run build && node dist/server.js",
+        "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+        "start-watch": "nodemon --exec babel-node -- server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "engines": {
+        "node": "10.3.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ShawonAshraf/BookWorm-API.git"
+    },
+    "author": "Shawon Ashraf",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ShawonAshraf/BookWorm-API/issues"
+    },
+    "homepage": "https://github.com/ShawonAshraf/BookWorm-API#readme",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1",
+        "nodemon": "^1.17.5",
+        "rimraf": "^2.6.2"
+    }
 }
