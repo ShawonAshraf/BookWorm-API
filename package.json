@@ -4,7 +4,7 @@
     "description": "API for a personal book library manager",
     "main": "index.js",
     "scripts": {
-        "start": "NODE_ENV=production npm run build && node dist/server.js",
+        "start": "export NODE_ENV=production && npm run build && node dist/server.js",
         "start-watch": "nodemon --exec babel-node -- server",
         "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
         "test": "export NODE_ENV=test && mocha --require babel-core/register ./**/*.test.js",
