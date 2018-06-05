@@ -10,7 +10,7 @@ let BookSchema = new mongoose.Schema({
     name: schemaProperties,
     author: schemaProperties,
     addedOn: {
-        type: Number,
+        type: String,
         default: null
     },
     addedBy: schemaProperties
