@@ -4,7 +4,7 @@
     "description": "API for a personal book library manager",
     "main": "index.js",
     "scripts": {
-        "start": "npm run build && node dist/server.js",
+        "start": "NODE_ENV=production npm run build && node dist/server.js",
         "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
         "start-watch": "nodemon --exec babel-node -- server",
         "test": "echo \"Error: no test specified\" && exit 1"
