@@ -10,7 +10,6 @@ import "./config/config"
 
 // define port number
 let port = process.env.PORT || 3000
-
 let app = new express()
 
 // register middleware
