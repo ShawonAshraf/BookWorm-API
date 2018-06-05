@@ -7,15 +7,9 @@ let port = process.env.PORT | 3000
 
 let app = new express()
 
-
 // register middleware
 app.use(bodyParser.json())
 
-app.get("/", (req, res) => {
-    res.send({
-        message: "Yeah got your message, now the server is running"
-    })
-})
 
 // start the server
 app.listen(port, () => {
