@@ -7,7 +7,8 @@
         "start": "NODE_ENV=production npm run build && node dist/server.js",
         "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
         "start-watch": "nodemon --exec babel-node -- server",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "NODE_ENV=test npm run build && mocha ./dist/**/*.test.js",
+        "test-watch": "NODE_ENV=test nodemon --exec mocha -- ./**/*.test.js"
     },
     "engines": {
         "node": "10.3.0"
