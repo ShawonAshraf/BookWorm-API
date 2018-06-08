@@ -36,4 +36,15 @@ describe("GET /books", () => {
             })
             .catch(err => done(err))
     })
+
+    it("Should fetch a book by name", (done) => {
+        request(app)
+            .get(`/books/byname/${books[0].name}`)
+            .expect(200)
+            .expect(res => {
+                expect(res.body.name).toBe(books[0].name)
+                done()
+            })
+            .catch(err => done(err))
+    })
 })
