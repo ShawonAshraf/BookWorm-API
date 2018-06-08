@@ -18,7 +18,7 @@ bookRouter.get("/all", (req, res) => {
 })
 
 // get book by mongodb document id
-bookRouter.get("/:id", (req, res) => {
+bookRouter.get("/byid/:id", (req, res) => {
     var id = req.params.id
 
     if (ObjectID.isValid(id)) {
@@ -32,6 +32,17 @@ bookRouter.get("/:id", (req, res) => {
     } else {
         res.status(400).send({ error: "Invalid ID" })
     }
+})
+
+// get book by name
+bookRouter.get("/byname/:name", (req, res) => {
+    var name = req.params.name
+
+    Book.findOne({ name: name })
+        .then(book => {
+            res.status(200).send(book)
+        })
+        .catch(err => res.status(404).send(err))
 })
 
 export default bookRouter
