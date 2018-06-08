@@ -31,7 +31,7 @@ describe("GET /books", () => {
             .get(`/books/${books[1]._id}`)
             .expect(200)
             .expect(res => {
-                expect(res.body.books._id).toBe(books[1]._id)
+                expect(res.body.book._id).toBe(books[1]._id.toHexString())
                 done()
             })
             .catch(err => done(err))
