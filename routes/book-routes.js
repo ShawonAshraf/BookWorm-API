@@ -23,7 +23,7 @@ bookRouter.get("/:id", (req, res) => {
 
     if (ObjectID.isValid(id)) {
         Book.findOne({ _id: id })
-            .then(books => {
+            .then(book => {
                 res.status(200).send({
                     book
                 })
