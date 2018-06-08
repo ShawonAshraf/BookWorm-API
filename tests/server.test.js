@@ -28,7 +28,7 @@ describe("GET /books", () => {
 
     it("Should fetch a book by id", (done) => {
         request(app)
-            .get(`/books/${books[1]._id}`)
+            .get(`/books/byid/${books[1]._id}`)
             .expect(200)
             .expect(res => {
                 expect(res.body.book._id).toBe(books[1]._id.toHexString())
