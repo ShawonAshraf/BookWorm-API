@@ -45,4 +45,15 @@ bookRouter.get("/byname/:name", (req, res) => {
         .catch(err => res.status(404).send(err))
 })
 
+// get book by author
+bookRouter.get("/byauthor/:author", (req, res) => {
+    var author = req.params.author
+
+    Book.findOne({ author: author })
+        .then(book => {
+            res.status(200).send(book)
+        })
+        .catch(err => res.status(404).send(err))
+})
+
 export default bookRouter
