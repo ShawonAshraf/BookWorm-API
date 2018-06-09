@@ -37,6 +37,19 @@ describe("GET /books", () => {
             .catch(err => done(err))
     })
 
+    it("Should reject an invalid id", (done) => {
+        let id = 12345
+
+        request(app)
+            .get(`/books/byid/${id}`)
+            .expect(400)
+            .expect(res => {
+                expect(res.body.error).toBe("Invalid ID")
+                done()
+            })
+            .catch(err => done(err))
+    })
+
     it("Should fetch a book by name", (done) => {
         request(app)
             .get(`/books/byname/${books[0].name}`)
