@@ -1,4 +1,5 @@
 import express from "express"
+import _ from "lodash"
 import mongoose from "mongoose"
 import { ObjectID } from "mongodb"
 
@@ -84,6 +85,23 @@ bookRouter.delete("/delete/:id", (req, res) => {
                 res.send(deletedBook)
             })
             .catch(err => res.status(404).send(err))
+    } else {
+        res.status(400).send({ "error": "Invalid ID" })
+    }
+})
+
+// update book info
+// by id
+bookRouter.patch("/update/:id", (req, res) => {
+    let id = req.params.id
+    let newInfo = _.pick(req.body, ["name", "author", "addedBy"])
+
+    if (ObjectID.isValid(id)) {
+        Book.findByIdAndUpdate(id, { $set: newInfo }, { new: true })
+            .then(updatedBook => {
+                res.status(200).send(updatedBook)
+            })
+            .catch(err => re.status(404).send(err))
     } else {
         res.status(400).send({ "error": "Invalid ID" })
     }
