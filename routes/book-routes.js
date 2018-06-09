@@ -67,7 +67,10 @@ bookRouter.post("/add", (req, res) => {
         addedBy: book.addedBy
     })
 
-    bookEntry.save().then(book => res.send(book), err => res.send(err))
+    bookEntry.save().then(
+        book => res.status(200).send(book),
+        err => res.status(400).send(err)
+    )
 })
 
 // delete a book
@@ -80,9 +83,9 @@ bookRouter.delete("/delete/:id", (req, res) => {
             .then(deletedBook => {
                 res.send(deletedBook)
             })
-            .catch(err => res.send(err))
+            .catch(err => res.status(404).send(err))
     } else {
-        res.send({ "error": "Invalid ID" })
+        res.status(400).send({ "error": "Invalid ID" })
     }
 })
 
