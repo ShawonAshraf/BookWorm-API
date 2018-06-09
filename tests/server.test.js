@@ -59,3 +59,23 @@ describe("GET /books", () => {
             .catch(err => done(e))
     })
 })
+
+describe("POST /books", () => {
+    it("Should add a book", (done) => {
+        let book = new Book({
+            name: "BookThree",
+            author: "AuthorThree",
+            addedOn: new Date(),
+            addedBy: "UserThree"
+        })
+
+        request(app)
+            .post("/books/add")
+            .send(book)
+            .expect(res => {
+                expect(res.body.name).toBe(book.name)
+                done()
+            })
+            .catch(err => done(err))
+    })
+})
