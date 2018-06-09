@@ -72,6 +72,7 @@ describe("POST /books", () => {
         request(app)
             .post("/books/add")
             .send(book)
+            .expect(200)
             .expect(res => {
                 expect(res.body.name).toBe(book.name)
                 done()
@@ -86,8 +87,22 @@ describe("DELETE /books", () => {
 
         request(app)
             .delete(`/books/delete/${id}`)
+            .expect(200)
             .expect(res => {
                 expect(res.body._id).toBe(id.toHexString())
+                done()
+            })
+            .catch(err => done(err))
+    })
+
+    it("Should reject an invalid id", (done) => {
+        let id = 12345
+
+        request(app)
+            .delete(`/books/delete/${id}`)
+            .expect(400)
+            .expect(res => {
+                expect(res.body.error).toBe("Invalid ID")
                 done()
             })
             .catch(err => done(err))
