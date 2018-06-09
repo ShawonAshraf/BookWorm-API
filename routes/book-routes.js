@@ -70,4 +70,20 @@ bookRouter.post("/add", (req, res) => {
     bookEntry.save().then(book => res.send(book), err => res.send(err))
 })
 
+// delete a book
+// by id
+bookRouter.delete("/delete/:id", (req, res) => {
+    let id = req.params.id
+
+    if (ObjectID.isValid(id)) {
+        Book.findByIdAndRemove(id)
+            .then(deletedBook => {
+                res.send(deletedBook)
+            })
+            .catch(err => res.send(err))
+    } else {
+        res.send({ "error": "Invalid ID" })
+    }
+})
+
 export default bookRouter
