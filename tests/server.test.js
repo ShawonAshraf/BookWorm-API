@@ -121,3 +121,25 @@ describe("DELETE /books", () => {
             .catch(err => done(err))
     })
 })
+
+describe("PATCH /books", () => {
+    it("Should update book info", (done) => {
+        let newInfo = {
+            name: "GG",
+            author: "GG",
+            addedBy: "GG"
+        }
+
+        let id = books[1]._id
+
+        request(app)
+            .patch(`/books/update/${id}`)
+            .send(newInfo)
+            .expect(200)
+            .expect(res => {
+                expect(res.body.name).toBe(newInfo.name)
+                done()
+            })
+            .catch(err => done(err))
+    })
+})
