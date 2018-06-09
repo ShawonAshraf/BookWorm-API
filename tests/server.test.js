@@ -79,3 +79,17 @@ describe("POST /books", () => {
             .catch(err => done(err))
     })
 })
+
+describe("DELETE /books", () => {
+    it("Should delete a book", (done) => {
+        let id = books[0]._id
+
+        request(app)
+            .delete(`/books/delete/${id}`)
+            .expect(res => {
+                expect(res.body._id).toBe(id.toHexString())
+                done()
+            })
+            .catch(err => done(err))
+    })
+})
