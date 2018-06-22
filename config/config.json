@@ -4,8 +4,5 @@
     },
     "development": {
         "MONGODB_URI": "mongodb://localhost:27017/BookWormDev"
-    },
-    "production": {
-        "MONGODB_URI": "mongodb://shawon:4YT-Z4S-69Y-bXR@ds016058.mlab.com:16058/bookworm"
     }
 }
