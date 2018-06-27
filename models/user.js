@@ -1,6 +1,7 @@
 import mongoose, { Mongoose } from "mongoose"
 import validator from "validator"
 import _ from "lodash"
+import jwt from "jsonwebtoken"
 
 let UserSchema = new mongoose.Schema({
     name: {
@@ -39,6 +40,22 @@ UserSchema.methods.toJSON = function() {
     let user = this
     let userObject = user.toObject()
     return _.pick(userObject, ["_id", "email"]);
+}
+
+// generate auth token for user
+UserSchema.methods.generateAuthToken = function() {
+    let user = this
+    let access = "auth"
+    let token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString()
+
+    user.tokens.push({
+        access,
+        token
+    })
+
+    return user.save().then(() => {
+        return token
+    }).catch((err) => console.log(err))
 }
 
 let User = mongoose.Model("User", UserSchema)
