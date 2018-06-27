@@ -14,18 +14,17 @@ userRouter.post("/signup", (req, res) => {
     let body = _.pick(req.body, ["name", "email", "password"])
     let user = new User(body)
 
-    user.save().then(() => {
-            // return auth token
-            user.generateAuthToken()
+    user.save()
+        .then(() => {
+            return user.generateAuthToken()
+                .then(token => {
+                    res.header('x-auth', token).send({
+                        name: user.name,
+                        email: user.email
+                    })
+                })
         })
-        .then((token) => {
-            res.header("x-auth", token).send({
-                id: user._id,
-                name: user.name,
-                email: user.email
-            })
-        })
-        .catch(err => res.status(400).send(err))
+
 })
 
 export default userRouter
