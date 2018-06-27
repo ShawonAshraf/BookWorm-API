@@ -44,4 +44,24 @@ describe("POST /user", () => {
             })
             .catch((err) => done(err))
     })
+
+    it("should login an user and return auth token and user", (done) => {
+        let email = users[1].email
+        let password = users[1].password
+
+        let user = {
+            email: email,
+            password: password
+        }
+
+        request(app)
+            .post("/user/login")
+            .send(user)
+            .expect(200)
+            .expect(res => {
+                expect(res.body.email).toBe(email)
+                done()
+            })
+            .catch(err => done(err))
+    })
 })
