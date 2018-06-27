@@ -38,5 +38,9 @@ let UserSchema = new mongoose.Schema({
 UserSchema.methods.toJSON = function() {
     let user = this
     let userObject = user.toObject()
-    return _.pick(userObject, ['_id', 'email']);
+    return _.pick(userObject, ["_id", "email"]);
 }
+
+let User = mongoose.Model("User", UserSchema)
+
+export default User
