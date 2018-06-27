@@ -16,5 +16,5 @@ export default Authenticate = (req, res, next) => {
         res.status(401).send({
             message: "Error authenticating user"
         })
-    });
+    })
 }
