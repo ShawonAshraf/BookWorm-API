@@ -24,7 +24,19 @@ userRouter.post("/signup", (req, res) => {
                     })
                 })
         })
+        .catch(err => res.send(err))
 
+})
+
+// get an user by email, password
+userRouter.post("/find", (req, res) => {
+    let body = _.pick(req.body, ["email", "password"])
+
+    User.findOne({ email: body.email })
+        .then((user) => res.send(user))
+        .catch(err => res.status(404).send({
+            message: "User not found, please register."
+        }))
 })
 
 export default userRouter
