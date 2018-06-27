@@ -2,6 +2,7 @@ import mongoose, { Mongoose } from "mongoose"
 import validator from "validator"
 import _ from "lodash"
 import jwt from "jsonwebtoken"
+import bcrypt from "bcryptjs"
 
 let UserSchema = new mongoose.Schema({
     name: {
@@ -76,6 +77,26 @@ UserSchema.statics.findByToken = function(token) {
     })
 }
 
+// find user by credentials
+UserSchema.statics.findByCredentials = function(email, password) {
+    let user = this
+
+    user.findOne({ email }).then((user) => {
+        if (!user) {
+            return Promise.reject()
+        }
+
+        return new Promise((resolve, reject) => {
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) {
+                    resolve(user)
+                } else {
+                    reject()
+                }
+            })
+        })
+    })
+}
 
 let User = mongoose.model("User", UserSchema)
 
