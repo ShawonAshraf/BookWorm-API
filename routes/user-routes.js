@@ -3,6 +3,9 @@ import _ from "lodash"
 import mongoose from "mongoose"
 import { ObjectID } from "mongodb"
 
+// auth middleware
+import { authenticate } from "../middleware/authenticate"
+
 // model
 import User from "../models/user"
 
@@ -58,9 +61,9 @@ userRouter.post("/login", (req, res) => {
 })
 
 // logout user
-userRouter.delete("/logout", (req, res) => {
+userRouter.delete("/logout", authenticate, (req, res) => {
     req.user.removeToken(req.token).then(() => {
-        res.status(200).send({ message: 'User has been logged out!' })
+        res.status(200).send({ message: "User has been logged out!" })
     }).catch((err) => {
         res.status(400).send({ err })
     })
