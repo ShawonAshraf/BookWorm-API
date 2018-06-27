@@ -19,9 +19,15 @@ import "./db/db"
 let port = process.env.PORT || 3000
 let app = new express()
 
+
 // register middleware
 app.use(bodyParser.json())
 app.use(morgan("combined"))
+
+// allow cors
+app.use(cors({
+    exposedHeaders: ['x-auth']
+}))
 
 // routes
 app.use("/books", bookRouter)
