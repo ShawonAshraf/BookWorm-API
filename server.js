@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 
 // routes
 app.use("/books", bookRouter)
-app.use("/user")
+app.use("/user", userRouter)
 
 
 // start the server
