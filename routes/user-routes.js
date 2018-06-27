@@ -39,4 +39,22 @@ userRouter.post("/find", (req, res) => {
         }))
 })
 
+// login an user
+userRouter.post("/login", (req, res) => {
+    let credentials = _.pick(req.body, ["email", "password"])
+
+    // if user exists a token will be sent
+    User.findByCredentials(credentials.email, credentials.password)
+        .then(user => {
+            user.generateAuthToken()
+                .then(token => res.status(200).header("x-auth", token).send(user))
+        })
+        .catch(err => res.status(404).send({
+            message: "Sorry, no user found with the following credential. Register.",
+            credential: {
+                email: credentials.email
+            }
+        }))
+})
+
 export default userRouter
