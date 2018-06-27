@@ -1,10 +1,12 @@
 {
     "test": {
         "MONGODB_URI": "mongodb://localhost:27017/BookWormTest",
-        "JWT_SECRET": "BookWorm"
+        "JWT_SECRET": "BookWorm",
+        "SALT": 10
     },
     "development": {
         "MONGODB_URI": "mongodb://localhost:27017/BookWormDev",
-        "JWT_SECRET": "BookWorm"
+        "JWT_SECRET": "BookWorm",
+        "SALT": 10
     }
 }
