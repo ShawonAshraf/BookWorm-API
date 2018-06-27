@@ -47,7 +47,8 @@ UserSchema.methods.toJSON = function() {
 UserSchema.methods.generateAuthToken = function() {
     let user = this
     let access = "auth"
-    let token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString()
+    let jwtPayload = user._id.toHexString() + user.email + user.password
+    let token = jwt.sign({ _id: jwtPayload, access }, process.env.JWT_SECRET).toString()
 
     user.tokens.push({
         access,
