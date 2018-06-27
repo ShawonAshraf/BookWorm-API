@@ -1,4 +1,6 @@
 import { ObjectID } from "mongodb"
+import jwt from "jsonwebtoken"
+
 import Book from "../models/book"
 import User from "../models/user"
 
@@ -13,13 +15,21 @@ export const users = [{
         _id: userOneId,
         name: "User1",
         email: "user1@bookworm.com",
-        password: "123456"
+        password: "123456",
+        tokens: [{
+            access: 'auth',
+            token: jwt.sign({ _id: userOneId, access: 'auth' }, process.env.JWT_SECRET).toString()
+        }]
     },
     {
         _id: userTwoId,
         name: "User2",
         email: "user2@bookworm.com",
-        password: "123456"
+        password: "123456",
+        tokens: [{
+            access: 'auth',
+            token: jwt.sign({ _id: userTwoId, access: 'auth' }, process.env.JWT_SECRET).toString()
+        }]
     }
 ]
 
@@ -50,7 +60,9 @@ export const populateBookData = (done) => {
 export const populateUserData = (done) => {
     User.remove({})
         .then(() => {
-            return User.insertMany(users)
+            let user1 = new User(users[0]).save()
+            let user2 = new User(users[1]).save()
+            return Promise.all([user1, user2])
         })
         .then(() => done())
 }
