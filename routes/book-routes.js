@@ -69,7 +69,7 @@ bookRouter.post("/add", authenticate, (req, res) => {
         name: book.name,
         author: book.author,
         addedOn: new Date(),
-        addedBy: book.addedBy
+        addedBy: req.user.name
     })
 
     bookEntry.save().then(
@@ -98,7 +98,7 @@ bookRouter.delete("/delete/:id", authenticate, (req, res) => {
 // by id
 bookRouter.put("/update/:id", authenticate, (req, res) => {
     let id = req.params.id
-    let newInfo = _.pick(req.body, ["name", "author", "addedBy"])
+    let newInfo = _.pick(req.body, ["name", "author"])
 
     if (ObjectID.isValid(id)) {
         Book.findByIdAndUpdate(id, { $set: newInfo }, { new: true })
