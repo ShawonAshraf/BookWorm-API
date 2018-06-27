@@ -4,6 +4,7 @@ import bodyParser from "body-parser"
 
 // import routers
 import bookRouter from "./routes/book-routes"
+import userRouter from "./routes/user-routes"
 
 // config
 import "./config/config"
@@ -19,6 +20,7 @@ app.use(bodyParser.json())
 
 // routes
 app.use("/books", bookRouter)
+app.use("/user")
 
 
 // start the server
