@@ -3,12 +3,16 @@ import _ from "lodash"
 import mongoose from "mongoose"
 import { ObjectID } from "mongodb"
 
+// model
 import Book from "../models/book"
+
+// auth middleware
+import { authenticate } from "../middleware/authenticate"
 
 let bookRouter = express.Router()
 
 // GET all books
-bookRouter.get("/all", (req, res) => {
+bookRouter.get("/all", authenticate, (req, res) => {
     Book.find({})
         .then((books) => {
             res.status(200).send({
@@ -19,7 +23,7 @@ bookRouter.get("/all", (req, res) => {
 })
 
 // get book by mongodb document id
-bookRouter.get("/byid/:id", (req, res) => {
+bookRouter.get("/byid/:id", authenticate, (req, res) => {
     let id = req.params.id
 
     if (ObjectID.isValid(id)) {
@@ -36,7 +40,7 @@ bookRouter.get("/byid/:id", (req, res) => {
 })
 
 // get book by name
-bookRouter.get("/byname/:name", (req, res) => {
+bookRouter.get("/byname/:name", authenticate, (req, res) => {
     let name = req.params.name
 
     Book.findOne({ name: name })
@@ -47,7 +51,7 @@ bookRouter.get("/byname/:name", (req, res) => {
 })
 
 // get book by author
-bookRouter.get("/byauthor/:author", (req, res) => {
+bookRouter.get("/byauthor/:author", authenticate, (req, res) => {
     let author = req.params.author
 
     Book.findOne({ author: author })
@@ -58,7 +62,7 @@ bookRouter.get("/byauthor/:author", (req, res) => {
 })
 
 // add a book
-bookRouter.post("/add", (req, res) => {
+bookRouter.post("/add", authenticate, (req, res) => {
     let book = req.body
 
     let bookEntry = new Book({
@@ -76,7 +80,7 @@ bookRouter.post("/add", (req, res) => {
 
 // delete a book
 // by id
-bookRouter.delete("/delete/:id", (req, res) => {
+bookRouter.delete("/delete/:id", authenticate, (req, res) => {
     let id = req.params.id
 
     if (ObjectID.isValid(id)) {
@@ -92,7 +96,7 @@ bookRouter.delete("/delete/:id", (req, res) => {
 
 // update book info
 // by id
-bookRouter.patch("/update/:id", (req, res) => {
+bookRouter.patch("/update/:id", authenticate, (req, res) => {
     let id = req.params.id
     let newInfo = _.pick(req.body, ["name", "author", "addedBy"])
 
