@@ -96,7 +96,7 @@ bookRouter.delete("/delete/:id", authenticate, (req, res) => {
 
 // update book info
 // by id
-bookRouter.patch("/update/:id", authenticate, (req, res) => {
+bookRouter.put("/update/:id", authenticate, (req, res) => {
     let id = req.params.id
     let newInfo = _.pick(req.body, ["name", "author", "addedBy"])
 

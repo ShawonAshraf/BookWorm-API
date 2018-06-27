@@ -131,7 +131,7 @@ describe("DELETE /books", () => {
     })
 })
 
-describe("PATCH /books", () => {
+describe("PUT /books", () => {
     it("Should update book info", (done) => {
         let newInfo = {
             name: "GG",
@@ -142,7 +142,7 @@ describe("PATCH /books", () => {
         let id = books[1]._id
 
         request(app)
-            .patch(`/books/update/${id}`)
+            .put(`/books/update/${id}`)
             .set("x-auth", users[0].tokens[0].token)
             .send(newInfo)
             .expect(200)
