@@ -57,4 +57,13 @@ userRouter.post("/login", (req, res) => {
         }))
 })
 
+// logout user
+userRouter.delete("/logout", (req, res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send({ message: 'User has been logged out!' })
+    }).catch((err) => {
+        res.status(400).send({ err })
+    })
+})
+
 export default userRouter
