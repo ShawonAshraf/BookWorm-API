@@ -9,7 +9,7 @@ import User from "../models/user"
 import { users, populateUserData } from "./seed"
 
 // pre hook
-beforeEach(populateUserData)
+// beforeEach(populateUserData)
 
 // test
 describe("POST /user", () => {

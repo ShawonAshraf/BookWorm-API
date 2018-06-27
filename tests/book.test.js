@@ -7,10 +7,11 @@ import app from "../server"
 // model
 import Book from "../models/book"
 // seed
-import { books, populateBookData } from "./seed"
+import { books, populateBookData, users, populateUserData } from "./seed"
 
 // pre hook to populate
 beforeEach(populateBookData)
+beforeEach(populateUserData)
 
 // test
 describe("GET /books", () => {
@@ -18,6 +19,7 @@ describe("GET /books", () => {
         // expect 2 books
         request(app)
             .get("/books/all")
+            .set("x-auth", users[0].tokens[0].token)
             .expect(200)
             .expect(res => {
                 expect(res.body.books.length).toBe(2)
@@ -29,6 +31,7 @@ describe("GET /books", () => {
     it("Should fetch a book by id", (done) => {
         request(app)
             .get(`/books/byid/${books[1]._id}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(200)
             .expect(res => {
                 expect(res.body.book._id).toBe(books[1]._id.toHexString())
@@ -42,6 +45,7 @@ describe("GET /books", () => {
 
         request(app)
             .get(`/books/byid/${id}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(400)
             .expect(res => {
                 expect(res.body.error).toBe("Invalid ID")
@@ -53,6 +57,7 @@ describe("GET /books", () => {
     it("Should fetch a book by name", (done) => {
         request(app)
             .get(`/books/byname/${books[0].name}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(200)
             .expect(res => {
                 expect(res.body.name).toBe(books[0].name)
@@ -64,6 +69,7 @@ describe("GET /books", () => {
     it("Should fetch a book by author name", (done) => {
         request(app)
             .get(`/books/byauthor/${books[0].author}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(200)
             .expect(res => {
                 expect(res.body.author).toBe(books[0].author)
@@ -84,6 +90,7 @@ describe("POST /books", () => {
 
         request(app)
             .post("/books/add")
+            .set("x-auth", users[0].tokens[0].token)
             .send(book)
             .expect(200)
             .expect(res => {
@@ -100,6 +107,7 @@ describe("DELETE /books", () => {
 
         request(app)
             .delete(`/books/delete/${id}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(200)
             .expect(res => {
                 expect(res.body._id).toBe(id.toHexString())
@@ -113,6 +121,7 @@ describe("DELETE /books", () => {
 
         request(app)
             .delete(`/books/delete/${id}`)
+            .set("x-auth", users[0].tokens[0].token)
             .expect(400)
             .expect(res => {
                 expect(res.body.error).toBe("Invalid ID")
@@ -134,6 +143,7 @@ describe("PATCH /books", () => {
 
         request(app)
             .patch(`/books/update/${id}`)
+            .set("x-auth", users[0].tokens[0].token)
             .send(newInfo)
             .expect(200)
             .expect(res => {
