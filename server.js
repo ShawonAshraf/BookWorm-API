@@ -21,6 +21,7 @@ let app = new express()
 
 // register middleware
 app.use(bodyParser.json())
+app.use(morgan("combined"))
 
 // routes
 app.use("/books", bookRouter)
