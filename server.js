@@ -33,6 +33,15 @@ app.use(cors({
 app.use("/books", bookRouter)
 app.use("/user", userRouter)
 
+// root
+app.get("/", (req, res) => {
+    res.status(200).send({
+        message: "BookWorm-API.",
+        description: "Personal book collection manager.",
+        github: "https://github.com/ShawonAshraf/BookWorm-API"
+    })
+})
+
 
 // start the server
 app.listen(port, () => {
