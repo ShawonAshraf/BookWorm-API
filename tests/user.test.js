@@ -30,4 +30,18 @@ describe("POST /user", () => {
             })
             .catch((err) => done(err))
     })
+
+    it("should return an already registered user", (done) => {
+        let email = users[0].email
+        let password = users[0].password
+
+        request(app)
+            .post("/user/find")
+            .send({ email, password })
+            .expect((res) => {
+                expect(res.body.email).toBe(email)
+                done()
+            })
+            .catch((err) => done(err))
+    })
 })
