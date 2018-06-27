@@ -64,4 +64,25 @@ describe("POST /user", () => {
             })
             .catch(err => done(err))
     })
+
+    it("should reject invalid login", (done) => {
+        let email = users[0].email
+        let password = users[0].password + "GGWP"
+
+        let user = {
+            email: email,
+            password: password
+        }
+
+        request(app)
+            .post("/user/login")
+            .send(user)
+            .expect(404)
+            .expect(res => {
+                let token = res.headers["x-auth"]
+                expect(token).toNotExist()
+                done()
+            })
+            .catch(err => done(err))
+    })
 })
