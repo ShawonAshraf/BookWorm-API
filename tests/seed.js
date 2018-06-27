@@ -13,13 +13,13 @@ export const users = [{
         _id: userOneId,
         name: "User1",
         email: "user1@bookworm.com",
-        password: "123"
+        password: "123456"
     },
     {
         _id: userTwoId,
         name: "User2",
         email: "user2@bookworm.com",
-        password: "123"
+        password: "123456"
     }
 ]
 
