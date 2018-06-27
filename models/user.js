@@ -76,6 +76,7 @@ UserSchema.statics.findByToken = function(token) {
     })
 }
 
+
 let User = mongoose.Model("User", UserSchema)
 
 export default User
