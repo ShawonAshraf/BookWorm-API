@@ -1,6 +1,5 @@
 import request from "supertest"
 import expect from "expect"
-import _ from "lodash"
 
 // app
 import app from "../server"
