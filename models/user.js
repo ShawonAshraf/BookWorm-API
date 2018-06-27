@@ -99,6 +99,17 @@ UserSchema.statics.findByCredentials = function(email, password) {
     })
 }
 
+// removing token for logging user out
+UserSchema.methods.removeToken = function(token) {
+    let user = this
+    return user.update({
+            $pull: {
+                tokens: { token }
+            }
+        })
+        .catch(err => err)
+}
+
 // pre hook for password check
 UserSchema.pre("save", function(next) {
     let user = this
