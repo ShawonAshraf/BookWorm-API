@@ -1,5 +1,6 @@
 import request from "supertest"
 import expect from "expect"
+import _ from "lodash"
 
 // app
 import app from "../server"
@@ -12,3 +13,22 @@ import { users, populateUserData } from "./seed"
 beforeEach(populateUserData)
 
 // test
+describe("POST /user", () => {
+    it("should register an user and return auth token", (done) => {
+        let user = {
+            name: "xyz",
+            email: "xyz@abc.com",
+            password: "123456"
+        }
+
+        request(app)
+            .post("/user/signup")
+            .send(user)
+            .expect((res) => {
+                expect(res.headers["x-auth"]).toExist()
+                expect(res.body.name).toBe(user.name)
+                done()
+            })
+            .catch((err) => done(err))
+    })
+})
