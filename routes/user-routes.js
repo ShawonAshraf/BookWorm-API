@@ -19,7 +19,11 @@ userRouter.post("/signup", (req, res) => {
             user.generateAuthToken()
         })
         .then((token) => {
-            res.header("x-auth", token).send(user)
+            res.header("x-auth", token).send({
+                id: user._id,
+                name: user.name,
+                email: user.email
+            })
         })
         .catch(err => res.status(400).send(err))
 })
