@@ -98,6 +98,24 @@ UserSchema.statics.findByCredentials = function(email, password) {
     })
 }
 
+// pre hook for password check
+UserSchema.pre("save", function(next) {
+    let user = this
+    let saltLevel = parseInt(process.env.SALT)
+
+    if (user.isModified("password")) {
+        bcrypt.genSalt(saltLevel, (err, salt) => {
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                user.password = hash
+                next()
+            })
+        })
+    } else {
+        next()
+    }
+})
+
+
 let User = mongoose.model("User", UserSchema)
 
 export default User
