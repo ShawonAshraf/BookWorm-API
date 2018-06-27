@@ -4,7 +4,7 @@ import expect from "expect"
 // app
 import app from "../server"
 
-// models
+// model
 import Book from "../models/book"
 // seed
 import { books, populateBookData } from "./seed"
