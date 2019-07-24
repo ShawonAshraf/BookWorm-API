@@ -1,4 +1,4 @@
-# Bookworm-API
+# bookman
 > An API for you if you have a large book collection and buy the same book multiple times by mistake because you couldn't keep track of them. Ahem! 🤓
 
 ## Intro
