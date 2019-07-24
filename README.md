@@ -22,22 +22,17 @@ Make sure your monogodb instance is running before you jump in.
 
 ### Installing Dependencies
 ```bash
-npm install
+yarn install
 ```
 
 ### Running
 ```bash
-npm start
-```
-
-Or watch with `nodemon`
-```bash
-npm run start-watch
+yarn run start-watch
 ```
 
 ### Test
 ```bash
-npm run test-watch
+yarn run test-watch
 ```
 
 Server will be running on [http://localhost:3000](http://localhost:3000)
