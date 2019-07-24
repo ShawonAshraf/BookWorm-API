@@ -1,5 +1,5 @@
 {
-    "name": "bookworm-api",
+    "name": "bookman",
     "version": "1.0.0",
     "description": "API for a personal book library manager",
     "main": "index.js",
