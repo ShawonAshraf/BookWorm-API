@@ -2,7 +2,7 @@
 > An API for you if you have a large book collection and buy the same book multiple times by mistake because you couldn't keep track of them. Ahem! 🤓
 
 ## Intro
-BookWorm-API is actually a personal book collection manager where you can
+bookman is actually a REST based personal book collection manager API where you can
 
 - Add your books
 - Edit book information
